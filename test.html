@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<style>
+    .style_range {
+        -webkit-appearance: none;
+        outline: none;
+        width: 20%;
+        height: 15px;
+        border-radius: 10px;
+        border: 1px black solid;
+    }
+
+    .style_range::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 15px;
+        height: 15px;
+        border-radius: 15px;
+        border: 1px white solid;
+        background: black;
+    }
+
+    .color {
+        border: none;
+        width: 100px;
+        height: 100px;
+    }
+
+    .rd {
+        background: linear-gradient(90deg, rgb(0,0,0) 0%, rgb(255,0,0) 100%);
+    }
+    .bl {
+        background: linear-gradient(90deg, rgb(0,0,0) 0%, rgb(0,0,255) 100%);
+    }
+    .gr {
+        background: linear-gradient(90deg, rgb(0,0,0) 0%, rgb(0,255,0) 100%);
+    }
+
+    .saida2 p {
+        font-size: 20px;
+        margin-top: 10px;
+    }
+</style>
+
+<script>
+    function mudacor() {
+        red = document.getElementById("rd").value;
+        blue = document.getElementById("bl").value;
+        green = document.getElementById("gr").value;
+        saida2 = document.getElementById("saida2");
+
+        saida2.innerHTML = "<p>rgb("+red+","+green+","+blue+")</p><p>"+rgb2hex(red, green, blue)+"</p>"
+
+        document.getElementById("cl").value = rgb2hex(red, green, blue);
+    }
+
+    function rgb2hex(r, g, b) {
+        try {
+            var rHex = parseInt(r).toString(16).padStart(2, '0');
+            var gHex = parseInt(g).toString(16).padStart(2, '0');
+            var bHex = parseInt(b).toString(16).padStart(2, '0');
+        } catch (e) {
+            return false;
+        }
+        if (rHex.length > 2 || gHex.length > 2 || bHex.length > 2) return false;
+        return '#' + rHex + gHex + bHex;
+    }  
+
+    function mudacor2() {
+        h = document.getElementById("cl").value;
+        saida = document.getElementById("saida");
+        saida2 = document.getElementById("saida2");
+
+        let r = 0, g = 0, b = 0;
+
+        // 3 digits
+        if (h.length == 4) {
+            r = "0x" + h[1] + h[1];
+            g = "0x" + h[2] + h[2];
+            b = "0x" + h[3] + h[3];
+
+        // 6 digits
+        } else if (h.length == 7) {
+            r = "0x" + h[1] + h[2];
+            g = "0x" + h[3] + h[4];
+            b = "0x" + h[5] + h[6];
+        }
+
+        saida2.innerHTML = "<p>rgb("+ +r+","+ +g+","+ +b+")</p><p>"+h+"</p>"
+        
+        document.getElementById("rd").value = +r;
+        document.getElementById("gr").value = +g;
+        document.getElementById("bl").value = +b; 
+    }
+</script>
+
+<body>
+    <center>
+    <p>Red</p>
+    <label>0 </label><input id="rd" type="range" min="0" max="255" value="255" class="style_range rd" oninput="mudacor()"><label> 255</label>
+    <p>Green</p>
+    <label>0 </label><input id="gr"  type="range" min="0" max="255" value="255" class="style_range gr" oninput="mudacor()"><label> 255</label>
+    <p>Blue</p>
+    <label>0 </label><input id="bl"  type="range" min="0" max="255" value="255" class="style_range bl" oninput="mudacor()"><label> 255</label>
+    <p>Color picker</p>
+    <input id="cl" type="color" value="#FFFFFF" class="color" oninput="mudacor2()">
+    </center>
+
+    <center>
+    <div id="saida2" class="saida2">
+        <p>rgb(255,255,255)</p>
+        <p>#ffffff</p>
+    </div>
+    </center>
+</body>
+
+</html>

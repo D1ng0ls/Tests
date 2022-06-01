@@ -6,4 +6,4 @@
 - **teste2.html**:
   - A very simple one page "CSS editor".
 
-- **Link**: <a hreft='https://d1ng0ls.github.io/Tests/' target='_blank' title="Cum">https://d1ng0ls.github.io/Tests/</a>
+- **Link**: <a hreft='https://d1ng0ls.github.io/Tests/'>https://d1ng0ls.github.io/Tests/</a>
